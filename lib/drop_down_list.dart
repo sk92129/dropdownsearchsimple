@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'dropdown_item_model.dart';
 
 class DropDownList extends StatefulWidget {
-  const DropDownList({super.key, required this.items});
+  const DropDownList({super.key, required this.items, required this.onChanged});
 
 
     final DropdownSearchOnFind<DropdownItemModel> items;
+      final ValueChanged<DropdownItemModel?> onChanged;
 
 
   @override
@@ -22,6 +23,11 @@ class _DropDownListState extends State<DropDownList> {
     
     return Expanded(child:     DropdownSearch<DropdownItemModel>(
             items: (f, cs) => widget.items(f, cs),
+
+
+            onChanged: (obj) =>  widget.onChanged(obj),
+
+
             suffixProps: const DropdownSuffixProps(
                 clearButtonProps: ClearButtonProps(isVisible: true)),
             compareFn: (item, selectedItem) =>

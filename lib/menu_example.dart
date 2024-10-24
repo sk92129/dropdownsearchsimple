@@ -36,6 +36,9 @@ class _MenuExamplesPageState extends State<MenuExamplesPage> {
                     items: (filter, cs) async {
                       return await getDataStatic(filter);
                     },
+                    onChanged: (obj) {
+                      print(obj);
+                    },
                   ),
                   const Padding(padding: EdgeInsets.all(4)),
                 ],
