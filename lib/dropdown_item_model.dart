@@ -1,18 +1,18 @@
-class UserModel {
+class DropdownItemModel {
   final String id;
   final DateTime createdAt;
   final String name;
   final String avatar;
 
-  UserModel({
+  DropdownItemModel({
     required this.id,
     required this.createdAt,
     required this.name,
     required this.avatar,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
+  factory DropdownItemModel.fromJson(Map<String, dynamic> json) {
+    return DropdownItemModel(
       id: json["id"],
       createdAt: DateTime.parse(json["createdAt"]),
       name: json["name"],
@@ -20,8 +20,8 @@ class UserModel {
     );
   }
 
-  static List<UserModel> fromJsonList(List list) {
-    return list.map((item) => UserModel.fromJson(item)).toList();
+  static List<DropdownItemModel> fromJsonList(List list) {
+    return list.map((item) => DropdownItemModel.fromJson(item)).toList();
   }
 
   ///this method will prevent the override of toString
@@ -35,7 +35,7 @@ class UserModel {
   }
 
   ///custom comparing function to check if two users are equal
-  bool isEqual(UserModel model) {
+  bool isEqual(DropdownItemModel model) {
     return id == model.id;
   }
 

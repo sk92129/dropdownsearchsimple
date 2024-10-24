@@ -1,8 +1,9 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
-import 'getdata.dart';
-import 'user_model.dart';
+import 'drop_down_list.dart';
+import 'get_data.dart';
+import 'dropdown_item_model.dart';
 
 class MenuExamplesPage extends StatefulWidget {
   const MenuExamplesPage({super.key});
@@ -31,42 +32,10 @@ class _MenuExamplesPageState extends State<MenuExamplesPage> {
               const Text("[example for async items]"),
               Row(
                 children: [
-                  Expanded(
-                    child: DropdownSearch<UserModel>(
-                      items: (f, cs) => getData(f),
-                      suffixProps: const DropdownSuffixProps(
-                          clearButtonProps: ClearButtonProps(isVisible: true)),
-                      compareFn: (item, selectedItem) =>
-                          item.id == selectedItem.id,
-                      dropdownBuilder: (context, selectedItem) {
-                        if (selectedItem == null) {
-                          return const SizedBox.shrink();
-                        }
-
-                        return ListTile(
-                          contentPadding: const EdgeInsets.only(left: 0),
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.blue,
-                              child: Text(selectedItem.name[0])),
-                          title: Text(selectedItem.name),
-                        );
-                      },
-                      popupProps: PopupProps.menu(
-                        disableFilter:
-                            true, //data will be filtered by the backend
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                        itemBuilder: (ctx, item, isDisabled, isSelected) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                                backgroundColor: Colors.blue,
-                                child: Text(item.name[0])),
-                            selected: isSelected,
-                            title: Text(item.name),
-                          );
-                        },
-                      ),
-                    ),
+                  DropDownList(
+                    items: (filter, cs) async {
+                      return await getDataStatic(filter);
+                    },
                   ),
                   const Padding(padding: EdgeInsets.all(4)),
                 ],
